@@ -1,10 +1,10 @@
-import requests
 """
 API Test Suite for User Management.
 
 This module contains tests that verify the functionality of the user management
 endpoints, including creation, retrieval, and updating of user data.
 """
+import requests
 class TestUsersAPI:
     """
     Test suite for validating the User API endpoints.
