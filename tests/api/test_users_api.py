@@ -7,7 +7,7 @@ endpoints, including creation, retrieval, and updating of user data.
 import requests
 
 class TestUsersAPI:
- """
+    """
     Test suite for validating the User API endpoints.
 
     This class contains methods to test the functionality of user-related API endpoints,
@@ -16,8 +16,8 @@ class TestUsersAPI:
 
     Attributes:
         BASE_URL (str): URL of the base endpoint for user operations.
-"""    
-    BASE_URL = 'https://api.example.com/users'
+    """   
+ BASE_URL = 'https://api.example.com/users'
 
     def test_get_user(self):
         """
