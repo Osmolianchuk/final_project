@@ -3,7 +3,6 @@ Module for testing login functionality using Selenium and pytest.
 
 This suite runs tests to validate user login scenarios.
 """
-
 import pytest
 from selenium import webdriver
 
