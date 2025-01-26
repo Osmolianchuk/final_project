@@ -18,7 +18,7 @@ class TestLogin:
         self.driver = None
 
     @pytest.fixture
-    def setup(self):        
+    def setup(self):
         """
         Setup fixture for initializing a Chrome WebDriver.
         This method starts a new WebDriver instance, 
