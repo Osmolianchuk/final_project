@@ -19,7 +19,14 @@ class TestLogin:
         self.driver = None
 
     @pytest.fixture
-    def setup(self):
+    def setup(self):        
+        """
+        Setup fixture for initializing a Chrome WebDriver.
+        This method starts a new WebDriver instance, 
+        navigates to the login page,
+        and ensures each test runs against a fresh session.
+        Yields control back to the test and closes the browser on completion.
+        """
         self.driver = webdriver.Chrome()
         self.driver.get("https://example.com/login")
         yield
@@ -29,7 +36,8 @@ class TestLogin:
         """
         Test a valid login scenario.
 
-        Ensures that a user can log in with valid credentials and is redirected to the appropriate landing page.
+        Ensures that a user can log in with valid credentials 
+        and is redirected to the appropriate landing page.
         """
         self.driver.find_element_by_id('username').send_keys('test_user')
         self.driver.find_element_by_id('password').send_keys('secure_password')
