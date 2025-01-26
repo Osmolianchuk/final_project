@@ -1,11 +1,10 @@
-import pytest
-from selenium import webdriver
 """
 Module for testing login functionality using Selenium and pytest.
 
 This suite runs tests to validate user login scenarios.
 """
-
+import pytest
+from selenium import webdriver
 class TestLogin:
     """
     Test cases for login functionality.
@@ -14,7 +13,7 @@ class TestLogin:
     of UI behavior and response handling.
     """
     def __init__(self):
-        self.driver = None        
+        self.driver = None         
     @pytest.fixture
     def setup(self):
         """
