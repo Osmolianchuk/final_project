@@ -1,3 +1,9 @@
+"""
+API Test Suite for User Management.
+
+This module contains tests that verify the functionality of the user management
+endpoints, including creation, retrieval, and updating of user data.
+"""
 import requests
 import pytest
 
