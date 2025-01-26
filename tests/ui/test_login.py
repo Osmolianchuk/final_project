@@ -13,10 +13,8 @@ class TestLogin:
     Contains tests that simulate user login actions and verify the correctness
     of UI behavior and response handling.
     """
-
     def __init__(self):
-        self.driver = None
-
+        self.driver = None        
     @pytest.fixture
     def setup(self):
         """
