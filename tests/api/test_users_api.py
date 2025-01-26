@@ -30,8 +30,8 @@ class TestUsersAPI:
         assert response.status_code == 200
         assert response.json()['user']['id'] == 123
 
-    def test_create_user(self):
-         """
+    def test_create_user(self):      
+        """
         Test the POST user endpoint.
         
         Verifies that creating a new user with valid data results in
