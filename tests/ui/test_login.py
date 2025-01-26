@@ -1,10 +1,10 @@
+import pytest
+from selenium import webdriver
 """
 Module for testing login functionality using Selenium and pytest.
 
 This suite runs tests to validate user login scenarios.
 """
-import pytest
-from selenium import webdriver
 
 class TestLogin:
     """
@@ -19,6 +19,7 @@ class TestLogin:
     def setup(self):
         """
         Setup fixture for initializing a Chrome WebDriver.
+        
         This method starts a new WebDriver instance, 
         navigates to the login page,
         and ensures each test runs against a fresh session.
