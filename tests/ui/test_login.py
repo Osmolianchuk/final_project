@@ -13,7 +13,7 @@ class TestLogin:
     of UI behavior and response handling.
     """
     def __init__(self):
-        self.driver = None   
+        self.driver = None
     @pytest.fixture
     def setup(self):
         """
