@@ -1,3 +1,6 @@
+"""
+Module for API Testing with Logging Integration.
+"""
 import logging
 import requests
 
@@ -24,7 +27,7 @@ class TestUsersAPI:
         """
         logging.info("Testing GET user endpoint for user ID 123")
         response = requests.get(f"{self.BASE_URL}/123", timeout=5)
-        
+       
         try:
             response.raise_for_status()
             logging.debug("Received response: %s", response.json())
