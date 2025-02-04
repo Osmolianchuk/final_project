@@ -10,7 +10,7 @@ This project provides a suite of automated tests for both Web UI and API compone
 - requests library
 
 ## Setup and Running Tests
-1. Install necessary packages: `pip install selenium pytest requests`
+1. Install necessary packages: `pip install -r requirements.txt`
 2. To run Web UI tests: `pytest tests/ui/`
 3. To run API tests: `pytest tests/api/`
 
