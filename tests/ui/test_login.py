@@ -28,7 +28,7 @@ class TestUsersAPI:
         
         logging.info("Testing GET user endpoint for user ID 123")
         response = requests.get(f"{self.BASE_URL}/123", timeout=5)
-       
+
         try:
             response.raise_for_status()
             logging.debug("Received response: %s", response.json())
@@ -38,7 +38,7 @@ class TestUsersAPI:
         except requests.exceptions.RequestException as err:
             logging.error("Error occurred: %s", err)
             raise
-        
+
         assert response.status_code == 200
         assert response.json()['user']['id'] == 123
         logging.info("GET user endpoint test passed.")
