@@ -25,6 +25,7 @@ class TestUsersAPI:
         Ensures that fetching a user by their ID returns a successful
         HTTP status and the correct user data.
         """
+        
         logging.info("Testing GET user endpoint for user ID 123")
         response = requests.get(f"{self.BASE_URL}/123", timeout=5)
        
