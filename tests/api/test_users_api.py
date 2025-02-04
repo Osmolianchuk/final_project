@@ -22,7 +22,7 @@ class TestUsersAPI:
         Ensures that fetching a user by their ID returns a successful
         HTTP status and the correct user data.
         """
-        response = requests.get(f"{self.BASE_URL}/123")
+        response = requests.get(f"{self.BASE_URL}/123",timeout=5)
         assert response.status_code == 200
         assert response.json()['user']['id'] == 123
 
@@ -33,7 +33,7 @@ class TestUsersAPI:
         a successful HTTP status and the correct user instance creation.
         """
         user_data = {"name": "John Doe", "email": "john@example.com"}
-        response = requests.post(self.BASE_URL, json=user_data)
+        response = requests.post(self.BASE_URL, json=user_data, timeout=5)
         assert response.status_code == 201
         assert response.json()['user']['name'] == user_data['name']
 
@@ -44,6 +44,6 @@ class TestUsersAPI:
         HTTP status and modified user instance.
         """
         updated_data = {"email": "newjohn@example.com"}
-        response = requests.put(f"{self.BASE_URL}/123", json=updated_data)
+        response = requests.put(f"{self.BASE_URL}/123", json=updated_data, timeout=5)
         assert response.status_code == 200
         assert response.json()['user']['email'] == updated_data['email']
