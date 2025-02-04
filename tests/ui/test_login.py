@@ -1,53 +1,88 @@
-"""
-Module for testing login functionality using Selenium and pytest.
+import requests
+import logging
 
-This suite runs tests to validate user login scenarios.
-"""
-import pytest
-from selenium import webdriver
-class TestLogin:
-    """
-    Test cases for login functionality.
+# Setup logging
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
-    Contains tests that simulate user login actions and verify the correctness
-    of UI behavior and response handling.
+class TestUsersAPI:
     """
-    def __init__(self):
-        self.driver = None
-    @pytest.fixture
-    def setup(self):
+    Test suite for validating the User API endpoints.
+    This class contains methods to test the functionality of user-related API endpoints,
+    including getting user details, creating a new user, and updating existing user data.
+    Each test checks for correct API responses and successful data manipulation.
+
+    Attributes:
+    BASE_URL (str): URL of the base endpoint for user operations.
+    """
+    BASE_URL = 'https://api.example.com/users'
+
+    def test_get_user(self):
         """
-        Setup fixture for initializing a Chrome WebDriver.
+        Test the GET user endpoint.
+        Ensures that fetching a user by their ID returns a successful
+        HTTP status and the correct user data.
+        """
+        logging.info("Testing GET user endpoint for user ID 123")
+        response = requests.get(f"{self.BASE_URL}/123", timeout=5)
         
-        This method starts a new WebDriver instance, 
-        navigates to the login page,
-        and ensures each test runs against a fresh session.
-        Yields control back to the test and closes the browser on completion.
-        """
-        self.driver = webdriver.Chrome()
-        self.driver.get("https://example.com/login")
-        yield
-        self.driver.quit()
+        try:
+            response.raise_for_status()
+            logging.debug(f"Received response: {response.json()}")
+        except requests.exceptions.HTTPError as err:
+            logging.error(f"HTTP error occurred: {err} - Status code: {response.status_code}")
+            raise
+        except requests.exceptions.RequestException as err:
+            logging.error(f"Error occurred: {err}")
+            raise
+        
+        assert response.status_code == 200
+        assert response.json()['user']['id'] == 123
+        logging.info("GET user endpoint test passed.")
 
-    def test_valid_login(self, _setup):
+    def test_create_user(self):
         """
-        Test a valid login scenario.
+        Test the POST user endpoint.
+        Verifies that creating a new user with valid data results in
+        a successful HTTP status and the correct user instance creation.
+        """
+        user_data = {"name": "John Doe", "email": "john@example.com"}
+        logging.info(f"Testing POST user endpoint with data: {user_data}")
+        response = requests.post(self.BASE_URL, json=user_data, timeout=5)
 
-        Ensures that a user can log in with valid credentials 
-        and is redirected to the appropriate landing page.
-        """
-        self.driver.find_element_by_id('username').send_keys('test_user')
-        self.driver.find_element_by_id('password').send_keys('secure_password')
-        self.driver.find_element_by_id('submit').click()
-        # further assertion checks
+        try:
+            response.raise_for_status()
+            logging.debug(f"Received response: {response.json()}")
+        except requests.exceptions.HTTPError as err:
+            logging.error(f"HTTP error occurred: {err} - Status code: {response.status_code}")
+            raise
+        except requests.exceptions.RequestException as err:
+            logging.error(f"Error occurred: {err}")
+            raise
 
-    def test_invalid_login(self, _setup):
-        """
-        Test an invalid login scenario.
+        assert response.status_code == 201
+        assert response.json()['user']['name'] == user_data['name']
+        logging.info("POST user endpoint test passed.")
 
-        Ensures that an error message is displayed if invalid credentials are used.
+    def test_update_user(self):
         """
-        self.driver.find_element_by_id('username').send_keys('wrong_user')
-        self.driver.find_element_by_id('password').send_keys('wrong_password')
-        self.driver.find_element_by_id('submit').click()
-        # further assertion checks
+        Test the PUT user endpoint.
+        Confirms that updating existing user data results in the correct
+        HTTP status and modified user instance.
+        """
+        updated_data = {"email": "newjohn@example.com"}
+        logging.info(f"Testing PUT user endpoint with data: {updated_data}")
+        response = requests.put(f"{self.BASE_URL}/123", json=updated_data, timeout=5)
+
+        try:
+            response.raise_for_status()
+            logging.debug(f"Received response: {response.json()}")
+        except requests.exceptions.HTTPError as err:
+            logging.error(f"HTTP error occurred: {err} - Status code: {response.status_code}")
+            raise
+        except requests.exceptions.RequestException as err:
+            logging.error(f"Error occurred: {err}")
+            raise
+
+        assert response.status_code == 200
+        assert response.json()['user']['email'] == updated_data['email']
+        logging.info("PUT user endpoint test passed.")
