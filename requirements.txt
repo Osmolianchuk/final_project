@@ -4,5 +4,5 @@ playwright==1.49.1
 pytest-html==4.1.1
 mock==5.1.0
 pytest-mock==3.7.0
-selenium~=4.28.1
+selenium==3.141.0
 requests>=2.25.1
