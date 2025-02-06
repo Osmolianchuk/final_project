@@ -4,8 +4,9 @@ API Test Suite for User Management.
 This module contains tests that verify the functionality of the user management
 endpoints, including creation, retrieval, and updating of user data.
 """
-import requests
 import logging
+import requests
+
 
 # Setting up logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
