@@ -22,3 +22,12 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files '*.py')
+     - name: Executing the test
+      run: |
+        mkdir -p reports
+        pytest tests/api --html=reports/api_report.html
+    - name: Upload pytest HTML report as an artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: pytest-report
+        path: reports/api_report.html    
