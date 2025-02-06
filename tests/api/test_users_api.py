@@ -32,7 +32,7 @@ class TestUsersAPI:
         logging.info("Testing GET user endpoint for user ID %s", user_id)
         response = requests.get(f"{self.BASE_URL}/{user_id}", timeout=5)
         assert response.status_code == 200
-        assert response.json()['id'] == user_id  # Adapted the key according to the JsonPlaceholder structure
+        assert response.json()['id'] == user_id
         logging.debug("GET Response: %s", response.json())
 
     def test_create_user(self):
