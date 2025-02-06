@@ -4,9 +4,8 @@ API Test Suite for User Management.
 This module contains tests that verify the functionality of the user management
 endpoints, including creation, retrieval, and updating of user data.
 """
-import logging
 import requests
-
+import logging
 
 # Setting up logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -29,11 +28,12 @@ class TestUsersAPI:
         Ensures that fetching a user by their ID returns a successful
         HTTP status and the correct user data.
         """
-        logging.info("Testing GET user endpoint for user ID 123")
-        response = requests.get(f"{self.BASE_URL}/123", timeout=5)
+        user_id = 123
+        logging.info("Testing GET user endpoint for user ID %s", user_id)
+        response = requests.get(f"{self.BASE_URL}/{user_id}", timeout=5)
         assert response.status_code == 200
-        assert response.json()['user']['id'] == 123
-        logging.debug(f"GET Response: {response.json()}")
+        assert response.json()['user']['id'] == user_id
+        logging.debug("GET Response: %s", response.json())
 
     def test_create_user(self):
         """
@@ -42,11 +42,11 @@ class TestUsersAPI:
         a successful HTTP status and the correct user instance creation.
         """
         user_data = {"name": "John Doe", "email": "john@example.com"}
-        logging.info("Testing POST user endpoint with user data: {user_data}")
+        logging.info("Testing POST user endpoint with user data: %s", user_data)
         response = requests.post(self.BASE_URL, json=user_data, timeout=5)
         assert response.status_code == 201
         assert response.json()['user']['name'] == user_data['name']
-        logging.debug(f"POST Response: {response.json()}")
+        logging.debug("POST Response: %s", response.json())
 
     def test_update_user(self):
         """
@@ -55,8 +55,8 @@ class TestUsersAPI:
         HTTP status and modified user instance.
         """
         updated_data = {"email": "newjohn@example.com"}
-        logging.info(f"Testing PUT user endpoint with update data: {updated_data}")
+        logging.info("Testing PUT user endpoint with update data: %s", updated_data)
         response = requests.put(f"{self.BASE_URL}/123", json=updated_data, timeout=5)
         assert response.status_code == 200
         assert response.json()['user']['email'] == updated_data['email']
-        logging.debug(f"PUT Response: {response.json()}")
+        logging.debug("PUT Response: %s", response.json())
