@@ -56,8 +56,8 @@ class TestUsersAPI:
         """
         updated_data = {"email": "newjohn@example.com"}
         user_id = 1  # Using a valid user ID
-        logging.info("Testing PUT user endpoint with update data for user ID %s: %s", user_id, updated_data)
+        logging.info("Testing PUT for user ID %s: %s", user_id, updated_data)
         response = requests.put(f"{self.BASE_URL}/{user_id}", json=updated_data, timeout=5)
         assert response.status_code == 200
-        assert 'id' in response.json()  # The JsonPlaceholder PUT response does not modify data but confirms reception
+        assert 'id' in response.json()
         logging.debug("PUT Response: %s", response.json())
