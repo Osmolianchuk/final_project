@@ -1,69 +1,65 @@
 """
-Module for API Testing with Logging Integration.
+Module for UI Testing with Selenium Integration.
 """
 import logging
-import requests
+import unittest
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 # Setup logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
-class TestUsersAPI:
+class TestUsersUI(unittest.TestCase):
     """
-    Test suite for validating the User API endpoints using demoqa.com.
-    This class contains methods to test the functionality of user-related API endpoints,
-    including getting user details, creating a new user, and updating existing user data.
-    Each test checks for correct API responses and successful data manipulation.
-
-    Attributes:
-    BASE_URL (str): URL of the base endpoint for user operations.
+    Test suite for validating the User interface on demoqa.com.
+    This class contains methods to test user interaction through the UI,
+    such as form submissions, button clicks, and text verifications.
     """
-    BASE_URL = 'https://demoqa.com/users'
 
-    def test_get_user(self):
+    def setUp(self):
+        """ Setup before each test function execution. """
+        # Assuming Chromedriver path is set in the PATH environment variable
+        self.driver = webdriver.Chrome()
+        self.driver.get("https://demoqa.com/")
+        logging.info("Webdriver initialized and navigated to demoqa.com")
+
+    def test_verify_user(self):
         """
-        Test the GET user endpoint.
-        Ensures that fetching a user by their ID returns a successful
-        HTTP status and the correct user data.
+        Verify user presence on UI.
+        This test involves navigating to a specific part of the website,
+        interacting with elements, and validating the output.
         """
+        # Assuming there’s a link to 'Users' we need to click
+        driver = self.driver
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.LINK_TEXT, "Text Box"))
+        ).click()
 
-        user_id = 123
-        logging.info("Testing GET user endpoint for user ID %s", user_id)
-        response = requests.get(f"{self.BASE_URL}/{user_id}", timeout=5)
+        # Assuming to find a specific username in an input field
+        username_input = WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located((By.ID, "userName"))
+        )
+        username_input.send_keys("John Doe")
+        username_input.send_keys(Keys.RETURN)  # Simulate hitting enter
 
-        try:
-            response.raise_for_status()
-            logging.debug("Received response: %s", response.json())
-        except requests.exceptions.HTTPError as err:
-            logging.error("HTTP error  %s - Status code: %s", err, response.status_code)
-            raise
-        except requests.exceptions.RequestException as err:
-            logging.error("Error occurred: %s", err)
-            raise
+        # Wait and verify some result on the page after input
+        WebDriverWait(driver, 10).until(
+            EC.text_to_be_present_in_element(
+                (By.ID, "output"), "John Doe"  # Assuming 'output' is a result container ID
+            )
+        )
 
-        assert response.status_code == 200
-        assert response.json()['id'] == user_id
-        logging.info("GET user endpoint test passed.")
+        logging.info('Username verified on UI.')
+        self.assertIn("John Doe", driver.find_element(By.ID, "output").text)
 
-    def test_create_user(self):
-        """
-        Test the POST user endpoint.
-        Verifies that creating a new user with valid data results in
-        a successful HTTP status and the correct user instance creation.
-        """
-        user_data = {"name": "John Doe", "email": "john@example.com"}
-        logging.info("Testing POST user endpoint with data: %s", user_data)
-        response = requests.post(self.BASE_URL, json=user_data, timeout=5)
+    def tearDown(self):
+        """ Clean up after each test function execution. """
+        self.driver.quit()
+        logging.info("Webdriver terminated.")
 
-        try:
-            response.raise_for_status()
-            logging.debug("Received response: %s", response.json())
-        except requests.exceptions.HTTPError as err:
-            logging.error("HTTP error occurred: %s - Status code: %s", err, response.status_code)
-            raise
-        except requests.exceptions.RequestException as err:
-            logging.error("Error occurred: %s", err)
-            raise
-
-        assert response.status_code == 201
-        assert response.json()['name'] == user_data['name']
-        logging.info("POST user endpoint test passed.")
+# Run the tests
+if __name__ == "__main__":
+    unittest.main()
