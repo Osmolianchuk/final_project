@@ -41,7 +41,7 @@ class TestUsersAPI:
             raise
 
         assert response.status_code == 200
-        assert response.json()['id'] == user_id  
+        assert response.json()['id'] == user_id
         logging.info("GET user endpoint test passed.")
 
     def test_create_user(self):
@@ -65,5 +65,5 @@ class TestUsersAPI:
             raise
 
         assert response.status_code == 201
-        assert response.json()['name'] == user_data['name']  
+        assert response.json()['name'] == user_data['name']
         logging.info("POST user endpoint test passed.")
