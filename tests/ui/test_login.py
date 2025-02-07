@@ -101,6 +101,3 @@ def test_submit_text_form():
         # Close the browser to free up resources
         driver.quit()
         logging.info("Web browser closed.")
-
-if __name__ == "__main__":
-    pytest.main()
