@@ -2,7 +2,7 @@ import pytest
 import logging
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui.WebDriverWait
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 # Setup basic configuration for logging
@@ -13,8 +13,10 @@ def wait_for_ready_state_full(driver, timeout=30):
     """
     Waits until the web page's document ready state is 'complete'.
     
-    This function polls the document.readyState until it equals 'complete',
-    indicating that the page has fully loaded including stylesheets, images, and subframes.
+    This function polls the document.readyState until 
+    it equals 'complete',
+    indicating that the page has fully loaded including 
+    stylesheets, images, and subframes.
     
     Parameters:
     - driver: The WebDriver object currently controlling the browser.
