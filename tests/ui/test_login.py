@@ -1,12 +1,28 @@
-import pytest
+"""
+Automated UI Test for Web Form Submission Using Selenium
+
+This script performs an automated user interface (UI) test specifically designed 
+to validate the behavior of a web form located at https://demoqa.com/text-box.
+The test automates the following steps:
+1. Loads the webpage.
+2. Verifies that the initial page load is complete.
+3. Refreshes the page to ensure elements remain consistent through page reloads.
+4. Waits until the desired input fields are fully loaded and visible.
+5. Fills out the form fields with predetermined data.
+6. Submits the form.
+7. Verifies that the elements behave as expected after submission 
+(optional if extended to implement).
+8. Closes the browser to clean up resources.
+"""
 import logging
+import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 # Setup basic configuration for logging
-logging.basicConfig(level=logging.INFO, filename='test_log.log', filemode='w', 
+logging.basicConfig(level=logging.INFO, filename='test_log.log', filemode='w',
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 def wait_for_ready_state_full(driver, timeout=30):
@@ -34,8 +50,10 @@ def test_submit_text_form():
     """
     Performs a test to interact with a web form, fill, and submit it.
     
-    This test automates the process of opening a web form, filling the fields with predetermine data,
-    submitting the form, and finally, closing the browser. Logging is used to record the steps and results.
+    This test automates the process of opening a web form, 
+    filling the fields with predetermine data,
+    submitting the form, and finally, closing the browser. 
+    Logging is used to record the steps and results.
     
     Uses global configurations for the WebDriver and assumes specific IDs for elements.
     
@@ -43,13 +61,13 @@ def test_submit_text_form():
     None
     """
     logging.info("Starting the test.")
-    
+
     # Initialize the WebDriver for Chrome
     driver = webdriver.Chrome()
     driver.get("https://demoqa.com/text-box")
-    
+  
     logging.info("Opened webpage: https://demoqa.com/text-box")
-    
+  
     # Wait for the full initial loading of the page
     wait_for_ready_state_full(driver)
 
@@ -59,7 +77,7 @@ def test_submit_text_form():
 
     # Wait again for the page to be fully loaded after the refresh
     wait_for_ready_state_full(driver)
-    
+  
     try:
         # Wait until the first input field (userName) is visible on the page
         WebDriverWait(driver, 10).until(
