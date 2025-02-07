@@ -65,9 +65,9 @@ def test_submit_text_form():
     # Initialize the WebDriver for Chrome
     driver = webdriver.Chrome()
     driver.get("https://demoqa.com/text-box")
-  
+
     logging.info("Opened webpage: https://demoqa.com/text-box")
-  
+
     # Wait for the full initial loading of the page
     wait_for_ready_state_full(driver)
 
@@ -77,7 +77,7 @@ def test_submit_text_form():
 
     # Wait again for the page to be fully loaded after the refresh
     wait_for_ready_state_full(driver)
-  
+
     try:
         # Wait until the first input field (userName) is visible on the page
         WebDriverWait(driver, 10).until(
