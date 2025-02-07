@@ -15,7 +15,6 @@ The test automates the following steps:
 8. Closes the browser to clean up resources.
 """
 import logging
-import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -100,4 +99,3 @@ def test_submit_text_form():
     finally:
         # Close the browser to free up resources
         driver.quit()
-        logging.info("Web browser closed.")
