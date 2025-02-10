@@ -19,6 +19,11 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import tempfile
+import os
+import shutil
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 # Setup basic configuration for logging
 logging.basicConfig(level=logging.INFO, filename='test_log.log', filemode='w',
