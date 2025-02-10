@@ -45,6 +45,13 @@ def wait_for_ready_state_full(driver, timeout=30):
     )
     logging.info("Page fully loaded.")
 
+def create_webdriver_instance():
+    options = Options()
+    options.add_argument("--incognito")
+    options.add_experimental_option("excludeSwitches", ["enable-logging"])
+    driver = webdriver.Chrome(options=options)
+    return driver
+  
 def test_submit_text_form():
     """
     Performs a test to interact with a web form, fill, and submit it.
