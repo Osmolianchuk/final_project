@@ -10,9 +10,13 @@ This project provides a suite of automated tests for both Web UI and API compone
 - requests library
 
 ## Setup and Running Tests
-0. Update pip: ' python -m pip install --upgrade pip'
-1. Install necessary packages: `pip install -r requirements.txt`
-2. To run Web UI tests: `pytest tests/ui/`
-3. To run API tests: `pytest tests/api/`
+Python 3.x (3.10+ is preferred)
+pip (Python package installer)
+Clone the repository: git clone https://github.com/Osmolianchuk/final_project.git
+Navigate to the project directory: cd -final_project
+Install the required Python packages: pip install -r requirements.txt
 
-For more detailed information, refer to individual test files which contain useful docstrings.
+## Test Execution and Reporting
+$  pytest api_tests/ --html=reports/api_report.html
+$  pytest ui_tests/ --html=reports/ui_report.html
+After execution, report will be automatically generated with captured logs for each test in reports/ folder
